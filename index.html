@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="FXU Apps — tools for traders. CRM for affiliates and a trading journal, built for the way you work." />
+<title>FXU Apps — Tools for traders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --bg: #fbfbfd;
+    --surface: #ffffff;
+    --surface-2: #f5f5f7;
+    --text: #1d1d1f;
+    --text-2: rgba(0,0,0,.56);
+    --text-3: rgba(29,29,31,.72);
+    --border: rgba(0,0,0,.06);
+    --border-2: rgba(0,0,0,.08);
+    --nav-bg: rgba(251,251,253,.72);
+    --blue: #0066CC;
+    --blue-bright: #0a84ff;
+    --green: #1f8a3a;
+    --green-bg: rgba(48,209,88,.14);
+  }
+  html[data-theme="dark"] {
+    --bg: #000;
+    --surface: #1c1c1e;
+    --surface-2: #0a0a0a;
+    --text: #f5f5f7;
+    --text-2: rgba(235,235,245,.6);
+    --text-3: rgba(235,235,245,.72);
+    --border: rgba(255,255,255,.08);
+    --border-2: rgba(255,255,255,.08);
+    --nav-bg: rgba(22,22,23,.72);
+    --green-bg: rgba(48,209,88,.16);
+  }
+
+  * , *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background .35s, color .35s;
+  }
+  a { color: inherit; }
+  button { font: inherit; }
+
+  /* ── Nav ───────────────────────────────────────────────── */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: var(--nav-bg);
+    border-bottom: .5px solid var(--border-2);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+  }
+  .nav-inner {
+    max-width: 1024px; margin: 0 auto; height: 48px;
+    padding: 0 22px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 13px;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 9px; text-decoration: none; font-weight: 600; letter-spacing: -.005em; color: var(--text); }
+  .nav-links { display: flex; gap: 28px; font-size: 12.5px; }
+  .nav-links a { text-decoration: none; color: var(--text-2); opacity: .85; transition: color .2s, opacity .2s; }
+  .nav-links a.active { color: var(--text); opacity: 1; font-weight: 500; }
+  .nav-links a:hover { color: var(--text); opacity: 1; }
+  .nav-right { display: flex; align-items: center; gap: 14px; color: var(--text-2); }
+  .nav-right a { text-decoration: none; font-size: 12.5px; }
+  .icon-btn { background: none; border: none; cursor: pointer; color: var(--text-2); padding: 4px; display: inline-flex; align-items: center; justify-content: center; }
+  .icon-btn:hover { color: var(--text); }
+
+  /* ── Hero ──────────────────────────────────────────────── */
+  .hero { padding: 88px 24px 56px; text-align: center; max-width: 980px; margin: 0 auto; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 999px;
+    background: rgba(0,102,204,.08); color: var(--blue-bright);
+    font-size: 12.5px; font-weight: 500; letter-spacing: .01em;
+    margin-bottom: 28px;
+  }
+  html[data-theme="dark"] .pill { background: rgba(10,132,255,.14); }
+  .pill-dot { width: 6px; height: 6px; border-radius: 99px; background: var(--blue-bright); }
+  .hero h1 {
+    font-size: clamp(44px, 6.4vw, 80px);
+    font-weight: 600; letter-spacing: -.035em; line-height: 1.05;
+    margin: 0 0 22px; text-wrap: balance;
+  }
+  .hero h1 .muted { color: var(--text-2); }
+  .hero p {
+    font-size: clamp(17px, 1.6vw, 21px); line-height: 1.45;
+    color: var(--text-2); max-width: 640px; margin: 0 auto;
+    text-wrap: pretty; font-weight: 400;
+  }
+
+  /* ── App grid ──────────────────────────────────────────── */
+  .grid-wrap { max-width: 1024px; margin: 0 auto; padding: 24px 24px 48px; }
+  .grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+  }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
+
+  .tile {
+    appearance: none; text-align: left; cursor: pointer; font: inherit; color: var(--text);
+    background: var(--surface);
+    border: .5px solid var(--border);
+    border-radius: 28px;
+    padding: 36px 32px 32px;
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: 20px; min-height: 320px;
+    transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s cubic-bezier(.2,.7,.2,1);
+    position: relative; overflow: hidden;
+    box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 1px 2px rgba(0,0,0,.02);
+  }
+  html[data-theme="dark"] .tile { box-shadow: 0 1px 0 rgba(255,255,255,.04) inset; }
+  .tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,.18), 0 4px 12px -4px rgba(0,0,0,.06);
+  }
+  html[data-theme="dark"] .tile:hover {
+    box-shadow: 0 24px 60px -20px rgba(0,0,0,.7), 0 4px 12px -4px rgba(0,0,0,.4);
+  }
+  .tile:active { transform: scale(.985); }
+  .tile-glow {
+    position: absolute; inset: 0; pointer-events: none; border-radius: 28px;
+    opacity: 0; transition: opacity .35s;
+  }
+  .tile:hover .tile-glow { opacity: 1; }
+  .tile[data-app="crm"] .tile-glow { background: radial-gradient(60% 80% at 0% 0%, rgba(0,102,204,.08), transparent 60%); }
+  .tile[data-app="journal"] .tile-glow { background: radial-gradient(60% 80% at 0% 0%, rgba(29,29,31,.08), transparent 60%); }
+
+  .tile-head {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; position: relative; z-index: 1;
+  }
+  .icon-wrap {
+    transition: transform .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .tile:hover .icon-wrap { transform: scale(1.06) rotate(-2deg); }
+
+  .badge {
+    font-size: 11px; font-weight: 600; letter-spacing: .06em;
+    padding: 5px 10px; border-radius: 999px;
+    background: var(--green-bg); color: var(--green);
+  }
+
+  .tile-title { position: relative; z-index: 1; }
+  .tile-tagline { font-size: 13px; font-weight: 500; letter-spacing: .02em; color: var(--text-2); margin-bottom: 6px; }
+  .tile-name { font-size: 32px; font-weight: 600; letter-spacing: -.02em; margin: 0; line-height: 1.05; }
+  .tile-desc {
+    font-size: 15px; line-height: 1.5; color: var(--text-3);
+    margin: 0; position: relative; z-index: 1;
+    text-wrap: pretty; max-width: 34ch;
+  }
+  .tile-cta {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 500; color: var(--blue);
+    position: relative; z-index: 1; margin-top: auto;
+  }
+  .tile-cta svg { transition: transform .25s; }
+  .tile:hover .tile-cta svg { transform: translateX(4px); }
+
+  /* ── Icon (depth variant) ──────────────────────────────── */
+  .app-icon {
+    width: 88px; height: 88px; border-radius: 20.7px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    box-shadow:
+      0 20px 50px -15px rgba(0,0,0,.4),
+      0 4px 10px -2px rgba(0,0,0,.15),
+      inset 0 1px 0 rgba(255,255,255,.35),
+      inset 0 -1px 2px rgba(0,0,0,.15);
+  }
+  .app-icon::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(120% 120% at 30% 0%, rgba(255,255,255,.4), transparent 50%);
+    pointer-events: none;
+  }
+  .app-icon::after {
+    content: ''; position: absolute; inset: 0; border-radius: inherit;
+    background: radial-gradient(80% 50% at 50% 110%, rgba(255,255,255,.2), transparent 70%);
+    pointer-events: none;
+  }
+  .app-icon.crm     { background: radial-gradient(120% 120% at 30% 0%, rgba(255,255,255,.4), transparent 50%), linear-gradient(135deg, #0a84ff 0%, #0040a0 100%); }
+  .app-icon.journal { background: radial-gradient(120% 120% at 30% 0%, rgba(255,255,255,.4), transparent 50%), linear-gradient(135deg, #2c2c2e 0%, #000 100%); }
+  .app-icon svg { position: relative; z-index: 2; filter: drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+
+  /* ── Coming soon strip ─────────────────────────────────── */
+  .strip-wrap { max-width: 1024px; margin: 0 auto; padding: 8px 24px 48px; }
+  .strip {
+    background: var(--surface-2);
+    border: .5px solid var(--border-2);
+    border-radius: 24px;
+    padding: 28px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+  }
+  .kicker {
+    font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--blue-bright); margin-bottom: 8px;
+  }
+  .strip-title { font-size: 22px; font-weight: 600; letter-spacing: -.015em; margin-bottom: 4px; }
+  .strip-desc { font-size: 14px; color: var(--text-2); text-wrap: pretty; max-width: 52ch; }
+  .btn-dark {
+    appearance: none; border: none; cursor: pointer;
+    background: var(--text); color: var(--bg);
+    font-size: 13.5px; font-weight: 500;
+    padding: 12px 22px; border-radius: 999px;
+    letter-spacing: -.005em;
+    transition: transform .2s, opacity .2s;
+  }
+  .btn-dark:hover { transform: scale(1.03); }
+  .btn-dark:active { transform: scale(.98); }
+
+  /* ── Footer ───────────────────────────────────────────── */
+  .footer-outer { border-top: .5px solid var(--border-2); margin-top: 24px; }
+  .footer {
+    padding: 28px 24px;
+    max-width: 1024px; margin: 0 auto;
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--text-2); flex-wrap: wrap; gap: 12px;
+  }
+  .footer a { text-decoration: none; }
+  .footer .links { display: flex; gap: 18px; }
+</style>
+</head>
+<body>
+  <!-- ── Top nav ── -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="/">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect width="24" height="24" rx="6" class="logo-bg" />
+          <path d="M7 7h10M7 12h7M7 17h4" class="logo-fg" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        <span>FXU</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#apps" class="active">Apps</a>
+        <a href="#affiliates">Affiliates</a>
+        <a href="#education">Education</a>
+        <a href="#support">Support</a>
+      </nav>
+      <div class="nav-right">
+        <button class="icon-btn" aria-label="Search">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <circle cx="6" cy="6" r="4.25" stroke="currentColor" stroke-width="1.4" />
+            <path d="M9.5 9.5l2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          </svg>
+        </button>
+        <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+            <path d="M12 8.5A5 5 0 1 1 6.5 3 4 4 0 0 0 12 8.5z" fill="currentColor" />
+          </svg>
+        </button>
+        <a href="#signin">Sign in</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Hero ── -->
+  <section class="hero" id="apps">
+    <div class="pill"><span class="pill-dot"></span> The FXU app suite</div>
+    <h1>Tools for traders.<br /><span class="muted">Built for the way you work.</span></h1>
+    <p>Sign in once. Switch between your CRM and trading journal without missing a beat.</p>
+  </section>
+
+  <!-- ── App grid ── -->
+  <section class="grid-wrap">
+    <div class="grid">
+      <!-- CRM tile -->
+      <button class="tile" data-app="crm" onclick="launch('crm')">
+        <span class="tile-glow"></span>
+        <div class="tile-head">
+          <div class="icon-wrap">
+            <div class="app-icon crm">
+              <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+                <circle cx="14" cy="17" r="5" fill="#fff" />
+                <circle cx="34" cy="17" r="5" fill="#fff" opacity=".75" />
+                <path d="M5 36c0-5 4-9 9-9s9 4 9 9v3H5v-3z" fill="#fff" />
+                <path d="M25 36c0-5 4-9 9-9s9 4 9 9v3H25v-3z" fill="#fff" opacity=".75" />
+              </svg>
+            </div>
+          </div>
+          <span class="badge">● LIVE</span>
+        </div>
+        <div class="tile-title">
+          <div class="tile-tagline">For affiliates and IBs</div>
+          <h3 class="tile-name">CRM</h3>
+        </div>
+        <p class="tile-desc">Track partners, payouts, and pipeline. Built for the way introducing brokers actually work.</p>
+        <div class="tile-cta">
+          <span>Open app</span>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M3 6.5h7M7 3.5l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+      </button>
+
+      <!-- Trade Journal tile -->
+      <button class="tile" data-app="journal" onclick="launch('journal')">
+        <span class="tile-glow"></span>
+        <div class="tile-head">
+          <div class="icon-wrap">
+            <div class="app-icon journal">
+              <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+                <rect x="9" y="14" width="4" height="20" rx="1" fill="#fff" opacity=".55" />
+                <rect x="8" y="10" width="6" height="2" fill="#fff" opacity=".55" />
+                <rect x="8" y="36" width="6" height="2" fill="#fff" opacity=".55" />
+                <rect x="22" y="20" width="4" height="14" rx="1" fill="#fff" />
+                <rect x="21" y="14" width="6" height="2" fill="#fff" />
+                <rect x="21" y="38" width="6" height="2" fill="#fff" />
+                <rect x="35" y="10" width="4" height="24" rx="1" fill="#fff" opacity=".85" />
+                <rect x="34" y="6"  width="6" height="2" fill="#fff" opacity=".85" />
+                <rect x="34" y="36" width="6" height="2" fill="#fff" opacity=".85" />
+              </svg>
+            </div>
+          </div>
+          <span class="badge">● LIVE</span>
+        </div>
+        <div class="tile-title">
+          <div class="tile-tagline">Every trade, examined</div>
+          <h3 class="tile-name">Trade Journal</h3>
+        </div>
+        <p class="tile-desc">Log positions, tag setups, review your edge. Patterns surface so you can stop repeating mistakes.</p>
+        <div class="tile-cta">
+          <span>Open app</span>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+            <path d="M3 6.5h7M7 3.5l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+      </button>
+    </div>
+  </section>
+
+  <!-- ── Coming soon ── -->
+  <section class="strip-wrap">
+    <div class="strip">
+      <div>
+        <div class="kicker">Coming soon</div>
+        <div class="strip-title">More tools, on the way.</div>
+        <div class="strip-desc">We're building education, market replay, and a partner payout console. Want early access?</div>
+      </div>
+      <button class="btn-dark" onclick="document.getElementById('signin')?.scrollIntoView({behavior:'smooth'})">Join the list →</button>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <div class="footer-outer">
+    <footer class="footer" id="signin">
+      <span>Copyright © 2026 FXU. All rights reserved.</span>
+      <span class="links">
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+        <a href="#contact">Contact</a>
+      </span>
+    </footer>
+  </div>
+
+  <style>
+    /* Logo theming */
+    .logo-bg { fill: var(--text); }
+    .logo-fg { stroke: var(--bg); }
+  </style>
+
+  <script>
+    // Persist theme
+    (function () {
+      const saved = localStorage.getItem('fxu-theme');
+      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      const btn = document.getElementById('theme-toggle');
+      btn?.addEventListener('click', () => {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.setItem('fxu-theme', 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('fxu-theme', 'dark');
+        }
+      });
+    })();
+
+    // Tile launch (placeholder routing; replace with real URLs)
+    function launch(app) {
+      const targets = {
+        crm: '#crm-app',
+        journal: '#journal-app',
+      };
+      const url = targets[app];
+      if (!url) return;
+      // Visual feedback handled by CSS :active; navigate next tick
+      setTimeout(() => { window.location.hash = url; }, 120);
+    }
+  </script>
+</body>
+</html>
