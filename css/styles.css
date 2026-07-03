@@ -21,7 +21,7 @@
   --green: #30d158;
   --orange: #ff9f0a;
   --purple: #bf5af2;
-  --orb-opacity: .38;
+  --orb-opacity: .28;
   --shadow-device:
     0 60px 120px -40px rgba(30, 60, 120, .32),
     0 20px 50px -20px rgba(30, 60, 120, .18);
@@ -151,13 +151,14 @@ html[data-theme="dark"] .pill { background: rgba(10, 132, 255, .14); }
   margin: 0 0 26px;
 }
 .grad-text {
-  background: linear-gradient(100deg, #0a84ff 0%, #7d5cff 30%, #e05cff 55%, #22d3ee 85%);
-  background-size: 220% 100%;
+  background: linear-gradient(105deg, #0071e3 0%, #5e5ce6 55%, #8e5ce6 100%);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
-  animation: gradShift 8s ease-in-out infinite alternate;
 }
-@keyframes gradShift { from { background-position: 0% 0; } to { background-position: 100% 0; } }
+html[data-theme="dark"] .grad-text {
+  background: linear-gradient(105deg, #0a84ff 0%, #6e6cf0 55%, #9d6bf0 100%);
+  -webkit-background-clip: text; background-clip: text;
+}
 .hero-sub {
   font-size: clamp(17px, 1.6vw, 21px); line-height: 1.5;
   color: var(--text-2); max-width: 660px; margin: 0 auto 34px; text-wrap: pretty;
@@ -222,7 +223,7 @@ html[data-theme="dark"] .up { color: #30d158; }
 
 /* Hero shot */
 .hero-shot { position: relative; max-width: 1080px; margin: 58px auto -6vw; padding: 0 8px; }
-.hero-inner, .ticker { will-change: transform, opacity; }
+.hero-inner { will-change: transform, opacity; }
 .hero-glow {
   position: absolute; inset: 6% -8% -12%;
   background:

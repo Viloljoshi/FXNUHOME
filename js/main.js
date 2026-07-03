@@ -74,7 +74,6 @@
     return { el: el, rx: 14, s: 0.94, ty: 26, ry: 0, tgtRx: 14, tgtS: 0.94, tgtTy: 26, tgtRy: 0, hero: el.hasAttribute('data-hero') };
   });
   var heroInner = document.querySelector('.hero-inner');
-  var tickerEl = document.querySelector('.ticker');
   var heroState = { y: 0, o: 1, tgtY: 0, tgtO: 1 };
   var mouseX = 0.5;
 
@@ -118,10 +117,6 @@
       heroState.o += (heroState.tgtO - heroState.o) * 0.12;
       heroInner.style.transform = 'translateY(' + heroState.y.toFixed(2) + 'px)';
       heroInner.style.opacity = heroState.o.toFixed(3);
-      if (tickerEl) {
-        tickerEl.style.transform = 'translateY(' + heroState.y.toFixed(2) + 'px)';
-        tickerEl.style.opacity = heroState.o.toFixed(3);
-      }
     }
     requestAnimationFrame(frame);
   }
