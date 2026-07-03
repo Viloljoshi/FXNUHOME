@@ -3,236 +3,19 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="description" content="FXU Apps — tools for traders. CRM for affiliates and a trading journal, built for the way you work." />
-<title>FXU Apps — Tools for traders</title>
+<meta name="description" content="FXU — the toolkit for serious traders. Trade Journal, Risk Calculator and Affiliate CRM, plus education and support for trading communities." />
+<title>FXU — The toolkit for serious traders</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-<style>
-  :root {
-    --bg: #fbfbfd;
-    --surface: #ffffff;
-    --surface-2: #f5f5f7;
-    --text: #1d1d1f;
-    --text-2: rgba(0,0,0,.56);
-    --text-3: rgba(29,29,31,.72);
-    --border: rgba(0,0,0,.06);
-    --border-2: rgba(0,0,0,.08);
-    --nav-bg: rgba(251,251,253,.72);
-    --blue: #0066CC;
-    --blue-bright: #0a84ff;
-    --green: #1f8a3a;
-    --green-bg: rgba(48,209,88,.14);
-  }
-  html[data-theme="dark"] {
-    --bg: #000;
-    --surface: #1c1c1e;
-    --surface-2: #0a0a0a;
-    --text: #f5f5f7;
-    --text-2: rgba(235,235,245,.6);
-    --text-3: rgba(235,235,245,.72);
-    --border: rgba(255,255,255,.08);
-    --border-2: rgba(255,255,255,.08);
-    --nav-bg: rgba(22,22,23,.72);
-    --green-bg: rgba(48,209,88,.16);
-  }
-
-  * , *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: background .35s, color .35s;
-  }
-  a { color: inherit; }
-  button { font: inherit; }
-
-  /* ── Nav ───────────────────────────────────────────────── */
-  .nav {
-    position: sticky; top: 0; z-index: 50;
-    background: var(--nav-bg);
-    border-bottom: .5px solid var(--border-2);
-    backdrop-filter: saturate(180%) blur(20px);
-    -webkit-backdrop-filter: saturate(180%) blur(20px);
-  }
-  .nav-inner {
-    max-width: 1024px; margin: 0 auto; height: 48px;
-    padding: 0 22px;
-    display: flex; align-items: center; justify-content: space-between;
-    font-size: 13px;
-  }
-  .nav-brand { display: flex; align-items: center; gap: 9px; text-decoration: none; font-weight: 600; letter-spacing: -.005em; color: var(--text); }
-  .nav-links { display: flex; gap: 28px; font-size: 12.5px; }
-  .nav-links a { text-decoration: none; color: var(--text-2); opacity: .85; transition: color .2s, opacity .2s; }
-  .nav-links a.active { color: var(--text); opacity: 1; font-weight: 500; }
-  .nav-links a:hover { color: var(--text); opacity: 1; }
-  .nav-right { display: flex; align-items: center; gap: 14px; color: var(--text-2); }
-  .nav-right a { text-decoration: none; font-size: 12.5px; }
-  .icon-btn { background: none; border: none; cursor: pointer; color: var(--text-2); padding: 4px; display: inline-flex; align-items: center; justify-content: center; }
-  .icon-btn:hover { color: var(--text); }
-
-  /* ── Hero ──────────────────────────────────────────────── */
-  .hero { padding: 88px 24px 56px; text-align: center; max-width: 980px; margin: 0 auto; }
-  .pill {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 6px 14px; border-radius: 999px;
-    background: rgba(0,102,204,.08); color: var(--blue-bright);
-    font-size: 12.5px; font-weight: 500; letter-spacing: .01em;
-    margin-bottom: 28px;
-  }
-  html[data-theme="dark"] .pill { background: rgba(10,132,255,.14); }
-  .pill-dot { width: 6px; height: 6px; border-radius: 99px; background: var(--blue-bright); }
-  .hero h1 {
-    font-size: clamp(44px, 6.4vw, 80px);
-    font-weight: 600; letter-spacing: -.035em; line-height: 1.05;
-    margin: 0 0 22px; text-wrap: balance;
-  }
-  .hero h1 .muted { color: var(--text-2); }
-  .hero p {
-    font-size: clamp(17px, 1.6vw, 21px); line-height: 1.45;
-    color: var(--text-2); max-width: 640px; margin: 0 auto;
-    text-wrap: pretty; font-weight: 400;
-  }
-
-  /* ── App grid ──────────────────────────────────────────── */
-  .grid-wrap { max-width: 1024px; margin: 0 auto; padding: 24px 24px 48px; }
-  .grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
-  }
-  @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } }
-
-  .tile {
-    appearance: none; text-align: left; cursor: pointer; font: inherit; color: var(--text);
-    background: var(--surface);
-    border: .5px solid var(--border);
-    border-radius: 28px;
-    padding: 36px 32px 32px;
-    display: flex; flex-direction: column; align-items: flex-start;
-    gap: 20px; min-height: 320px;
-    transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s cubic-bezier(.2,.7,.2,1);
-    position: relative; overflow: hidden;
-    box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 1px 2px rgba(0,0,0,.02);
-  }
-  html[data-theme="dark"] .tile { box-shadow: 0 1px 0 rgba(255,255,255,.04) inset; }
-  .tile:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 24px 60px -20px rgba(0,0,0,.18), 0 4px 12px -4px rgba(0,0,0,.06);
-  }
-  html[data-theme="dark"] .tile:hover {
-    box-shadow: 0 24px 60px -20px rgba(0,0,0,.7), 0 4px 12px -4px rgba(0,0,0,.4);
-  }
-  .tile:active { transform: scale(.985); }
-  .tile-glow {
-    position: absolute; inset: 0; pointer-events: none; border-radius: 28px;
-    opacity: 0; transition: opacity .35s;
-  }
-  .tile:hover .tile-glow { opacity: 1; }
-  .tile[data-app="crm"] .tile-glow { background: radial-gradient(60% 80% at 0% 0%, rgba(0,102,204,.08), transparent 60%); }
-  .tile[data-app="journal"] .tile-glow { background: radial-gradient(60% 80% at 0% 0%, rgba(29,29,31,.08), transparent 60%); }
-
-  .tile-head {
-    display: flex; align-items: center; justify-content: space-between;
-    width: 100%; position: relative; z-index: 1;
-  }
-  .icon-wrap {
-    transition: transform .35s cubic-bezier(.2,.7,.2,1);
-  }
-  .tile:hover .icon-wrap { transform: scale(1.06) rotate(-2deg); }
-
-  .badge {
-    font-size: 11px; font-weight: 600; letter-spacing: .06em;
-    padding: 5px 10px; border-radius: 999px;
-    background: var(--green-bg); color: var(--green);
-  }
-
-  .tile-title { position: relative; z-index: 1; }
-  .tile-tagline { font-size: 13px; font-weight: 500; letter-spacing: .02em; color: var(--text-2); margin-bottom: 6px; }
-  .tile-name { font-size: 32px; font-weight: 600; letter-spacing: -.02em; margin: 0; line-height: 1.05; }
-  .tile-desc {
-    font-size: 15px; line-height: 1.5; color: var(--text-3);
-    margin: 0; position: relative; z-index: 1;
-    text-wrap: pretty; max-width: 34ch;
-  }
-  .tile-cta {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 14px; font-weight: 500; color: var(--blue);
-    position: relative; z-index: 1; margin-top: auto;
-  }
-  .tile-cta svg { transition: transform .25s; }
-  .tile:hover .tile-cta svg { transform: translateX(4px); }
-
-  /* ── Icon (depth variant) ──────────────────────────────── */
-  .app-icon {
-    width: 88px; height: 88px; border-radius: 20.7px;
-    display: flex; align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-    box-shadow:
-      0 20px 50px -15px rgba(0,0,0,.4),
-      0 4px 10px -2px rgba(0,0,0,.15),
-      inset 0 1px 0 rgba(255,255,255,.35),
-      inset 0 -1px 2px rgba(0,0,0,.15);
-  }
-  .app-icon::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(120% 120% at 30% 0%, rgba(255,255,255,.4), transparent 50%);
-    pointer-events: none;
-  }
-  .app-icon::after {
-    content: ''; position: absolute; inset: 0; border-radius: inherit;
-    background: radial-gradient(80% 50% at 50% 110%, rgba(255,255,255,.2), transparent 70%);
-    pointer-events: none;
-  }
-  .app-icon.crm     { background: radial-gradient(120% 120% at 30% 0%, rgba(255,255,255,.4), transparent 50%), linear-gradient(135deg, #0a84ff 0%, #0040a0 100%); }
-  .app-icon.journal { background: radial-gradient(120% 120% at 30% 0%, rgba(255,255,255,.4), transparent 50%), linear-gradient(135deg, #2c2c2e 0%, #000 100%); }
-  .app-icon svg { position: relative; z-index: 2; filter: drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
-
-  /* ── Coming soon strip ─────────────────────────────────── */
-  .strip-wrap { max-width: 1024px; margin: 0 auto; padding: 8px 24px 48px; }
-  .strip {
-    background: var(--surface-2);
-    border: .5px solid var(--border-2);
-    border-radius: 24px;
-    padding: 28px 32px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 24px; flex-wrap: wrap;
-  }
-  .kicker {
-    font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--blue-bright); margin-bottom: 8px;
-  }
-  .strip-title { font-size: 22px; font-weight: 600; letter-spacing: -.015em; margin-bottom: 4px; }
-  .strip-desc { font-size: 14px; color: var(--text-2); text-wrap: pretty; max-width: 52ch; }
-  .btn-dark {
-    appearance: none; border: none; cursor: pointer;
-    background: var(--text); color: var(--bg);
-    font-size: 13.5px; font-weight: 500;
-    padding: 12px 22px; border-radius: 999px;
-    letter-spacing: -.005em;
-    transition: transform .2s, opacity .2s;
-  }
-  .btn-dark:hover { transform: scale(1.03); }
-  .btn-dark:active { transform: scale(.98); }
-
-  /* ── Footer ───────────────────────────────────────────── */
-  .footer-outer { border-top: .5px solid var(--border-2); margin-top: 24px; }
-  .footer {
-    padding: 28px 24px;
-    max-width: 1024px; margin: 0 auto;
-    display: flex; justify-content: space-between;
-    font-size: 12px; color: var(--text-2); flex-wrap: wrap; gap: 12px;
-  }
-  .footer a { text-decoration: none; }
-  .footer .links { display: flex; gap: 18px; }
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <!-- ── Top nav ── -->
-  <header class="nav">
+
+  <!-- ══ Nav ══ -->
+  <header class="nav" id="nav">
     <div class="nav-inner">
-      <a class="nav-brand" href="/">
+      <a class="nav-brand" href="#top" aria-label="FXU home">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <rect width="24" height="24" rx="6" class="logo-bg" />
           <path d="M7 7h10M7 12h7M7 17h4" class="logo-fg" stroke-width="2.2" stroke-linecap="round" />
@@ -240,162 +23,293 @@
         <span>FXU</span>
       </a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="#apps" class="active">Apps</a>
-        <a href="#affiliates">Affiliates</a>
+        <a href="#apps">Apps</a>
+        <a href="#affiliates">For Affiliates</a>
         <a href="#education">Education</a>
-        <a href="#support">Support</a>
       </nav>
       <div class="nav-right">
-        <button class="icon-btn" aria-label="Search">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <circle cx="6" cy="6" r="4.25" stroke="currentColor" stroke-width="1.4" />
-            <path d="M9.5 9.5l2.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
-          </svg>
-        </button>
         <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
-          <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
             <path d="M12 8.5A5 5 0 1 1 6.5 3 4 4 0 0 0 12 8.5z" fill="currentColor" />
           </svg>
         </button>
-        <a href="#signin">Sign in</a>
+        <button class="nav-signin" data-waitlist-open>Sign in</button>
       </div>
     </div>
   </header>
 
-  <!-- ── Hero ── -->
-  <section class="hero" id="apps">
-    <div class="pill"><span class="pill-dot"></span> The FXU app suite</div>
-    <h1>Tools for traders.<br /><span class="muted">Built for the way you work.</span></h1>
-    <p>Sign in once. Switch between your CRM and trading journal without missing a beat.</p>
-  </section>
+  <main id="top">
 
-  <!-- ── App grid ── -->
-  <section class="grid-wrap">
-    <div class="grid">
-      <!-- CRM tile -->
-      <button class="tile" data-app="crm" onclick="launch('crm')">
-        <span class="tile-glow"></span>
-        <div class="tile-head">
-          <div class="icon-wrap">
-            <div class="app-icon crm">
-              <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
-                <circle cx="14" cy="17" r="5" fill="#fff" />
-                <circle cx="34" cy="17" r="5" fill="#fff" opacity=".75" />
-                <path d="M5 36c0-5 4-9 9-9s9 4 9 9v3H5v-3z" fill="#fff" />
-                <path d="M25 36c0-5 4-9 9-9s9 4 9 9v3H25v-3z" fill="#fff" opacity=".75" />
-              </svg>
-            </div>
-          </div>
-          <span class="badge">● LIVE</span>
+    <!-- ══ Hero ══ -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="pill hero-el" style="--d:0"><span class="pill-dot"></span> The FXU app suite</div>
+        <h1 class="hero-el" style="--d:1">The toolkit for<br /><span class="grad-text">serious traders.</span></h1>
+        <p class="hero-sub hero-el" style="--d:2">Journal every trade. Size every risk. Grow every partnership.<br class="bp" />
+        Three apps and a community — built for the way you actually work.</p>
+        <div class="hero-ctas hero-el" style="--d:3">
+          <a class="btn-primary" href="#apps">Explore the apps</a>
+          <button class="btn-ghost" data-waitlist-open>Join the waitlist <span class="chev">›</span></button>
         </div>
-        <div class="tile-title">
-          <div class="tile-tagline">For affiliates and IBs</div>
-          <h3 class="tile-name">CRM</h3>
-        </div>
-        <p class="tile-desc">Track partners, payouts, and pipeline. Built for the way introducing brokers actually work.</p>
-        <div class="tile-cta">
-          <span>Open app</span>
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path d="M3 6.5h7M7 3.5l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </div>
-      </button>
-
-      <!-- Trade Journal tile -->
-      <button class="tile" data-app="journal" onclick="launch('journal')">
-        <span class="tile-glow"></span>
-        <div class="tile-head">
-          <div class="icon-wrap">
-            <div class="app-icon journal">
-              <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
-                <rect x="9" y="14" width="4" height="20" rx="1" fill="#fff" opacity=".55" />
-                <rect x="8" y="10" width="6" height="2" fill="#fff" opacity=".55" />
-                <rect x="8" y="36" width="6" height="2" fill="#fff" opacity=".55" />
-                <rect x="22" y="20" width="4" height="14" rx="1" fill="#fff" />
-                <rect x="21" y="14" width="6" height="2" fill="#fff" />
-                <rect x="21" y="38" width="6" height="2" fill="#fff" />
-                <rect x="35" y="10" width="4" height="24" rx="1" fill="#fff" opacity=".85" />
-                <rect x="34" y="6"  width="6" height="2" fill="#fff" opacity=".85" />
-                <rect x="34" y="36" width="6" height="2" fill="#fff" opacity=".85" />
-              </svg>
-            </div>
-          </div>
-          <span class="badge">● LIVE</span>
-        </div>
-        <div class="tile-title">
-          <div class="tile-tagline">Every trade, examined</div>
-          <h3 class="tile-name">Trade Journal</h3>
-        </div>
-        <p class="tile-desc">Log positions, tag setups, review your edge. Patterns surface so you can stop repeating mistakes.</p>
-        <div class="tile-cta">
-          <span>Open app</span>
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path d="M3 6.5h7M7 3.5l3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </div>
-      </button>
-    </div>
-  </section>
-
-  <!-- ── Coming soon ── -->
-  <section class="strip-wrap">
-    <div class="strip">
-      <div>
-        <div class="kicker">Coming soon</div>
-        <div class="strip-title">More tools, on the way.</div>
-        <div class="strip-desc">We're building education, market replay, and a partner payout console. Want early access?</div>
       </div>
-      <button class="btn-dark" onclick="document.getElementById('signin')?.scrollIntoView({behavior:'smooth'})">Join the list →</button>
-    </div>
-  </section>
+      <div class="hero-shot hero-el" style="--d:4">
+        <div class="device tilt" data-tilt>
+          <div class="device-bar"><span></span><span></span><span></span><div class="device-url">trade-journal.fxu</div></div>
+          <img src="assets/trade-journal.png" alt="FXU Trade Journal dashboard showing P&L, win rate and equity curve" width="1600" height="1084" fetchpriority="high" />
+        </div>
+        <div class="hero-glow" aria-hidden="true"></div>
+      </div>
+    </section>
 
-  <!-- ── Footer ── -->
+    <!-- ══ Apps intro ══ -->
+    <section class="section" id="apps">
+      <div class="section-head reveal">
+        <div class="kicker">The apps</div>
+        <h2>Three apps. One workflow.</h2>
+        <p>Everything talks the same language — sign in and move between journal, risk and partnerships without missing a beat.</p>
+      </div>
+
+      <!-- Quick switcher tiles -->
+      <div class="app-row">
+        <a class="chip-tile reveal" style="--d:0" href="https://trade-journal-gules-chi.vercel.app/login" target="_blank" rel="noopener">
+          <span class="chip-icon journal" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 48 48" fill="none"><rect x="9" y="14" width="4" height="20" rx="1" fill="#fff" opacity=".55"/><rect x="22" y="20" width="4" height="14" rx="1" fill="#fff"/><rect x="35" y="10" width="4" height="24" rx="1" fill="#fff" opacity=".85"/></svg>
+          </span>
+          <span class="chip-name">Trade Journal</span>
+          <span class="chip-arrow">›</span>
+        </a>
+        <a class="chip-tile reveal" style="--d:1" href="https://risk-calculator-zeta.vercel.app/" target="_blank" rel="noopener">
+          <span class="chip-icon risk" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 48 48" fill="none"><rect x="10" y="8" width="28" height="32" rx="5" stroke="#fff" stroke-width="3.4"/><path d="M16 17h16" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/><circle cx="18" cy="26" r="2.3" fill="#fff"/><circle cx="30" cy="26" r="2.3" fill="#fff"/><circle cx="18" cy="33" r="2.3" fill="#fff"/><circle cx="30" cy="33" r="2.3" fill="#fff"/></svg>
+          </span>
+          <span class="chip-name">Risk Calculator</span>
+          <span class="chip-arrow">›</span>
+        </a>
+        <a class="chip-tile reveal" style="--d:2" href="https://affiliate-crm-delta.vercel.app/login" target="_blank" rel="noopener">
+          <span class="chip-icon crm" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 48 48" fill="none"><circle cx="14" cy="17" r="5" fill="#fff"/><circle cx="34" cy="17" r="5" fill="#fff" opacity=".75"/><path d="M5 36c0-5 4-9 9-9s9 4 9 9v3H5v-3z" fill="#fff"/><path d="M25 36c0-5 4-9 9-9s9 4 9 9v3H25v-3z" fill="#fff" opacity=".75"/></svg>
+          </span>
+          <span class="chip-name">Affiliate CRM</span>
+          <span class="chip-arrow">›</span>
+        </a>
+      </div>
+
+      <!-- ── Trade Journal feature ── -->
+      <article class="feature">
+        <div class="feature-copy reveal">
+          <div class="kicker">Trade Journal</div>
+          <h3>Every trade,<br />examined.</h3>
+          <p>Log positions, tag setups and let the patterns surface. Your equity curve, win rate and drawdown — always one glance away.</p>
+          <ul class="feature-list">
+            <li>P&amp;L, win rate, profit factor &amp; max drawdown</li>
+            <li>Filter by range, direction, asset — forex &amp; crypto</li>
+            <li>AI insights, signals and a built-in risk calc</li>
+          </ul>
+          <a class="text-link" href="https://trade-journal-gules-chi.vercel.app/login" target="_blank" rel="noopener">Open Trade Journal <span class="chev">›</span></a>
+        </div>
+        <div class="feature-shot reveal">
+          <div class="device tilt" data-tilt>
+            <div class="device-bar"><span></span><span></span><span></span><div class="device-url">trade-journal.fxu</div></div>
+            <img src="assets/trade-journal.png" alt="Trade Journal dashboard" width="1600" height="1084" loading="lazy" />
+          </div>
+        </div>
+      </article>
+
+      <!-- ── Risk Calculator feature ── -->
+      <article class="feature flip">
+        <div class="feature-copy reveal">
+          <div class="kicker risk-k">Risk Calculator</div>
+          <h3>Size the trade.<br />Not the ego.</h3>
+          <p>Balance, risk percent, entry, stop — and your exact position size appears. Know your dollar risk and reward before you click buy.</p>
+          <ul class="feature-list">
+            <li>Position size from account risk in real time</li>
+            <li>Dollar risk, reward at target RR, pips at risk</li>
+            <li>Any instrument — from EURCHF to BTC</li>
+          </ul>
+          <a class="text-link" href="https://risk-calculator-zeta.vercel.app/" target="_blank" rel="noopener">Open Risk Calculator <span class="chev">›</span></a>
+        </div>
+        <div class="feature-shot reveal">
+          <div class="device tilt" data-tilt>
+            <div class="device-bar"><span></span><span></span><span></span><div class="device-url">risk-calculator.fxu</div></div>
+            <img src="assets/risk-calculator.png" alt="Risk / position size calculator" width="1600" height="1084" loading="lazy" />
+          </div>
+        </div>
+      </article>
+
+      <!-- ── Affiliate CRM feature ── -->
+      <article class="feature">
+        <div class="feature-copy reveal">
+          <div class="kicker crm-k">Affiliate CRM</div>
+          <h3>Partnerships,<br />under control.</h3>
+          <p>Built for introducing brokers. Track every affiliate from lead to active, log commissions monthly, and watch the totals move.</p>
+          <ul class="feature-list">
+            <li>Affiliates with status, terms &amp; joining dates</li>
+            <li>Commission ledger — pending, paid, cancelled</li>
+            <li>Dashboards: monthly commission &amp; top affiliates</li>
+          </ul>
+          <a class="text-link" href="https://affiliate-crm-delta.vercel.app/login" target="_blank" rel="noopener">Open Affiliate CRM <span class="chev">›</span></a>
+        </div>
+        <div class="feature-shot reveal">
+          <div class="device tilt" data-tilt>
+            <div class="device-bar"><span></span><span></span><span></span><div class="device-url">affiliate-crm.fxu</div></div>
+            <img src="assets/affiliate-crm.png" alt="Affiliate CRM dashboard" width="1600" height="904" loading="lazy" />
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ══ For affiliates (dark band) ══ -->
+    <section class="dark-band" id="affiliates">
+      <div class="dark-inner">
+        <div class="section-head light reveal">
+          <div class="kicker">For affiliates &amp; IBs</div>
+          <h2>You bring the community.<br />We bring everything else.</h2>
+          <p>We sit in the middle of the FX ecosystem — matching educators, creators and introducing brokers with the right regulated brokers, then backing them with software and support.</p>
+        </div>
+        <div class="bento">
+          <div class="bento-card wide reveal" style="--d:0">
+            <div class="bento-icon grad-blue" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2" fill="#fff"/><rect x="13" y="3" width="8" height="8" rx="2" fill="#fff" opacity=".7"/><rect x="3" y="13" width="8" height="8" rx="2" fill="#fff" opacity=".7"/><rect x="13" y="13" width="8" height="8" rx="2" fill="#fff" opacity=".4"/></svg>
+            </div>
+            <h4>The full software suite</h4>
+            <p>Trade Journal, Risk Calculator and Affiliate CRM — for you and your community. Professional tooling your members would otherwise pay for, included in the partnership.</p>
+          </div>
+          <div class="bento-card reveal" style="--d:1">
+            <div class="bento-icon grad-purple" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3a7 7 0 0 1 7 7c0 2.5-1.4 4.4-3 5.6V18a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1v-2.4c-1.6-1.2-3-3.1-3-5.6a7 7 0 0 1 7-7z" fill="#fff"/><rect x="9" y="20.5" width="6" height="1.8" rx=".9" fill="#fff" opacity=".7"/></svg>
+            </div>
+            <h4>Community support</h4>
+            <p>Help running and engaging your trading community — content, live sessions and answers when your members need them.</p>
+          </div>
+          <div class="bento-card reveal" style="--d:2">
+            <div class="bento-icon grad-cyan" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6" stroke="#fff" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+            </div>
+            <h4>Guidance &amp; research</h4>
+            <p>Market research and best-practice guidance for your channels — so what you publish is sharp, current and credible.</p>
+          </div>
+          <div class="bento-card wide reveal" style="--d:3">
+            <div class="bento-icon grad-green" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h4>Fair, transparent partnerships</h4>
+            <p>We match you with regulated brokers on terms that reflect the true value of your audience — with payouts you can actually track in your own CRM.</p>
+          </div>
+        </div>
+        <div class="dark-cta reveal">
+          <button class="btn-light" data-waitlist-open>Become a partner</button>
+          <span class="dark-cta-note">Educators · Content creators · Introducing brokers</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ Education ══ -->
+    <section class="section" id="education">
+      <div class="section-head reveal">
+        <div class="kicker">Education</div>
+        <h2>Sessions that make<br />you a better trader.</h2>
+        <p>Live, practical sessions for our partner communities. No indicators-for-sale, no signals hype — just the craft of trading, taught properly.</p>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-card reveal" style="--d:0">
+          <div class="edu-num">01</div>
+          <h4>Identifying patterns</h4>
+          <p>Read structure instead of guessing — trends, ranges, liquidity and the handful of repeatable setups worth trading. Learn to see what the chart is actually telling you.</p>
+        </div>
+        <div class="edu-card reveal" style="--d:1">
+          <div class="edu-num">02</div>
+          <h4>Risk management</h4>
+          <p>The part that keeps you in the game. Position sizing, risk-reward, drawdown control — and how to make the Risk Calculator do the math before every entry.</p>
+        </div>
+        <div class="edu-card reveal" style="--d:2">
+          <div class="edu-num">03</div>
+          <h4>Trading psychology</h4>
+          <p>Discipline over dopamine. Handling losing streaks, avoiding revenge trades, and building rules you can actually follow when it matters.</p>
+        </div>
+        <div class="edu-card reveal" style="--d:3">
+          <div class="edu-num">04</div>
+          <h4>Review &amp; journaling</h4>
+          <p>Your own data is your best teacher. Journal every trade, tag your setups, then review sessions turn those entries into your edge.</p>
+        </div>
+      </div>
+      <div class="edu-note reveal">
+        <p>Sessions run live with Q&amp;A inside partner communities — and every concept plugs straight into the FXU apps you already use.</p>
+      </div>
+    </section>
+
+    <!-- ══ Waitlist band ══ -->
+    <section class="waitband" id="waitlist">
+      <div class="waitband-inner reveal">
+        <div class="kicker">Early access</div>
+        <h2>Be first in line.</h2>
+        <p>Education sessions, partner tooling and new apps — join the waitlist and we'll reach out as spots open.</p>
+        <button class="btn-primary lg" data-waitlist-open>Join the waitlist</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ══ Footer ══ -->
   <div class="footer-outer">
-    <footer class="footer" id="signin">
-      <span>Copyright © 2026 FXU. All rights reserved.</span>
+    <footer class="footer">
+      <span>Copyright © <span id="year">2026</span> FXU. All rights reserved.</span>
       <span class="links">
-        <a href="#privacy">Privacy</a>
-        <a href="#terms">Terms</a>
-        <a href="#contact">Contact</a>
+        <a href="#apps">Apps</a>
+        <a href="#affiliates">Affiliates</a>
+        <a href="#education">Education</a>
       </span>
     </footer>
   </div>
 
-  <style>
-    /* Logo theming */
-    .logo-bg { fill: var(--text); }
-    .logo-fg { stroke: var(--bg); }
-  </style>
+  <!-- ══ Waitlist modal ══ -->
+  <div class="modal" id="waitlist-modal" role="dialog" aria-modal="true" aria-labelledby="wl-title" hidden>
+    <div class="modal-backdrop" data-waitlist-close></div>
+    <div class="modal-card">
+      <button class="modal-x" data-waitlist-close aria-label="Close">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M1 1l10 10M11 1L1 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
 
-  <script>
-    // Persist theme
-    (function () {
-      const saved = localStorage.getItem('fxu-theme');
-      if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-      const btn = document.getElementById('theme-toggle');
-      btn?.addEventListener('click', () => {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        if (isDark) {
-          document.documentElement.removeAttribute('data-theme');
-          localStorage.setItem('fxu-theme', 'light');
-        } else {
-          document.documentElement.setAttribute('data-theme', 'dark');
-          localStorage.setItem('fxu-theme', 'dark');
-        }
-      });
-    })();
+      <div class="modal-body" id="wl-form-view">
+        <h3 id="wl-title">Join the waitlist</h3>
+        <p class="modal-sub">Tell us who you are — we'll be in touch as access opens.</p>
+        <form id="waitlist-form" novalidate>
+          <label class="field">
+            <span>Name</span>
+            <input type="text" name="name" required autocomplete="name" placeholder="Jane Doe" />
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="you@company.com" />
+          </label>
+          <label class="field">
+            <span>I am a…</span>
+            <select name="role">
+              <option>Trader</option>
+              <option>Educator / content creator</option>
+              <option>Introducing broker / affiliate</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Anything else? <em>(optional)</em></span>
+            <textarea name="message" rows="2" placeholder="What are you most interested in?"></textarea>
+          </label>
+          <p class="form-error" id="wl-error" hidden></p>
+          <button type="submit" class="btn-primary full" id="wl-submit">Request access</button>
+        </form>
+      </div>
 
-    // Tile launch (placeholder routing; replace with real URLs)
-    function launch(app) {
-      const targets = {
-        crm: '#crm-app',
-        journal: '#journal-app',
-      };
-      const url = targets[app];
-      if (!url) return;
-      // Visual feedback handled by CSS :active; navigate next tick
-      setTimeout(() => { window.location.hash = url; }, 120);
-    }
-  </script>
+      <div class="modal-body success" id="wl-success-view" hidden>
+        <div class="check-wrap" aria-hidden="true">
+          <svg viewBox="0 0 52 52" class="check-svg"><circle class="check-circle" cx="26" cy="26" r="24" fill="none"/><path class="check-mark" fill="none" d="M14 27l8 8 16-17"/></svg>
+        </div>
+        <h3>You're on the list.</h3>
+        <p class="modal-sub">Thanks — we'll reach out to <strong id="wl-success-email"></strong> as soon as spots open.</p>
+        <button class="btn-ghost" data-waitlist-close>Done</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/waitlist.js" defer></script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
