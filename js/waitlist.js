@@ -1,7 +1,7 @@
-/* FXU waitlist — saves signups as GitHub issues in a dedicated repo.
+/* FXU waitlist - saves signups as GitHub issues in a dedicated repo.
  *
  * Setup (one time):
- *   1. Keep the repo below (private is fine — issues API works the same).
+ *   1. Keep the repo below (private is fine - issues API works the same).
  *   2. Create a FINE-GRAINED personal access token at
  *      github.com/settings/personal-access-tokens/new with:
  *        • Resource owner: the account that owns the repo below
@@ -10,7 +10,7 @@
  *   3. Split the token string into a few pieces and paste them into
  *      TOKEN_PARTS below (split defeats automated secret scanners;
  *      worst case someone extracts it and can only file issues in
- *      that one repo — revoke & re-issue anytime).
+ *      that one repo - revoke & re-issue anytime).
  */
 (function () {
   'use strict';
@@ -56,7 +56,7 @@
 
     var token = TOKEN_PARTS.join('');
     if (!token) {
-      setError('Waitlist is not accepting submissions right now — please email us instead.');
+      setError('Waitlist is not accepting submissions right now. Please email us instead.');
       return;
     }
 
