@@ -292,6 +292,7 @@ html[data-theme="dark"] .device { box-shadow: var(--shadow-device), 0 0 0 .5px r
 .chip-icon.journal { background: linear-gradient(135deg, #2c2c2e, #000); }
 .chip-icon.risk    { background: linear-gradient(135deg, #34d16b, #1f8a3a); }
 .chip-icon.crm     { background: linear-gradient(135deg, #0a84ff, #0040a0); }
+.chip-icon.edu     { background: linear-gradient(135deg, #ffb340, #d1490a); }
 .chip-arrow { color: var(--text-2); font-size: 16px; transition: transform .25s var(--ease); }
 .chip-tile:hover .chip-arrow { transform: translateX(3px); }
 

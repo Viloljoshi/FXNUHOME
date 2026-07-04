@@ -1,0 +1,149 @@
+/* ════════════════════════════════════════════════════════════
+   FXU · Live Education page
+   Extends css/styles.css (tokens, nav, hero, reveals, modal)
+   ════════════════════════════════════════════════════════════ */
+
+/* ── Hero tweaks ────────────────────────────────────────── */
+.edu-hero { padding-bottom: 40px; }
+.edu-hero .hero-sub { max-width: 700px; }
+
+.nav-links a.active { color: var(--text); font-weight: 600; }
+
+/* Quick facts under the CTAs */
+.edu-facts {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; flex-wrap: wrap;
+  margin-top: 40px;
+  font-size: 13px; color: var(--text-2);
+}
+.edu-facts b { color: var(--text); font-weight: 700; }
+.edu-dot { width: 3px; height: 3px; border-radius: 99px; background: var(--text-2); opacity: .5; }
+
+/* ── Session cards ("What you'll get") ──────────────────── */
+.session-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px;
+  max-width: 920px; margin: 0 auto;
+}
+.session-card {
+  background: var(--surface);
+  border: .5px solid var(--border-2);
+  border-radius: 28px;
+  padding: 34px 32px 30px;
+  position: relative; overflow: hidden;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s;
+}
+.session-card:hover { transform: translateY(-4px); box-shadow: 0 24px 54px -20px rgba(0, 0, 0, .16); }
+html[data-theme="dark"] .session-card { background: var(--surface-2); }
+html[data-theme="dark"] .session-card:hover { box-shadow: 0 24px 54px -20px rgba(0, 0, 0, .65); }
+.session-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.session-icon {
+  width: 46px; height: 46px; border-radius: 13px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .28), 0 8px 20px -6px rgba(0, 0, 0, .35);
+  transition: transform .35s var(--ease);
+}
+.session-card:hover .session-icon { transform: scale(1.08) rotate(-3deg); }
+.session-icon.brief { background: linear-gradient(135deg, #0a84ff, #0040a0); }
+.session-icon.class { background: linear-gradient(135deg, #8e5ce6, #4b2a9e); }
+.session-when {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  padding: 6px 12px; border-radius: 999px;
+  background: var(--surface-2); border: .5px solid var(--border);
+  color: var(--text-2);
+}
+html[data-theme="dark"] .session-when { background: rgba(255, 255, 255, .06); }
+.session-card h3 { font-size: 23px; font-weight: 700; letter-spacing: -.02em; margin-bottom: 8px; }
+.session-sub { font-size: 14px; line-height: 1.5; color: var(--text-2); margin: 0 0 18px; text-wrap: pretty; }
+.session-card .feature-list { margin-bottom: 22px; }
+.session-meta {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+  padding-top: 18px; border-top: .5px solid var(--border);
+  font-size: 12.5px;
+}
+.session-len { font-weight: 600; color: var(--text-3); }
+.session-time { color: var(--text-2); font-variant-numeric: tabular-nums; }
+
+@media (max-width: 760px) { .session-grid { grid-template-columns: 1fr; } }
+
+/* ── July schedule ──────────────────────────────────────── */
+.sched { max-width: 860px; margin: 0 auto; display: grid; gap: 34px; }
+.sched-week-label {
+  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text-2); margin-bottom: 12px; padding-left: 4px;
+}
+.sched-rows { display: grid; gap: 12px; }
+.sched-row {
+  display: grid; grid-template-columns: 86px 1fr auto;
+  gap: 20px; align-items: center;
+  background: var(--surface);
+  border: .5px solid var(--border-2);
+  border-radius: 22px;
+  padding: 20px 26px 20px 20px;
+  position: relative; overflow: hidden;
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
+}
+.sched-row:hover {
+  transform: translateY(-3px) scale(1.005);
+  box-shadow: 0 18px 44px -18px rgba(0, 0, 0, .16);
+  border-color: rgba(10, 132, 255, .25);
+}
+html[data-theme="dark"] .sched-row { background: var(--surface-2); }
+html[data-theme="dark"] .sched-row:hover { box-shadow: 0 18px 44px -18px rgba(0, 0, 0, .7); }
+
+.sched-date {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--surface-2);
+  border: .5px solid var(--border);
+  border-radius: 15px;
+  padding: 12px 8px;
+  min-height: 72px;
+}
+html[data-theme="dark"] .sched-date { background: rgba(255, 255, 255, .05); }
+.sched-date .d {
+  font-size: 26px; font-weight: 800; letter-spacing: -.03em; line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.sched-date .m { font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--text-2); margin-top: 4px; }
+
+.sched-tag {
+  display: inline-block;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px; margin-bottom: 8px;
+}
+.sched-tag.brief { color: #0071e3; background: rgba(10, 132, 255, .1); }
+.sched-tag.class { color: #7d4ad1; background: rgba(142, 92, 230, .12); }
+html[data-theme="dark"] .sched-tag.brief { color: #6db2ff; }
+html[data-theme="dark"] .sched-tag.class { color: #b394f2; }
+
+.sched-info h4 { font-size: 17.5px; font-weight: 700; letter-spacing: -.015em; margin-bottom: 8px; }
+.sched-pills { display: flex; gap: 7px; flex-wrap: wrap; }
+.sched-pills span {
+  font-size: 11.5px; font-weight: 500; color: var(--text-2);
+  background: var(--surface-2);
+  border: .5px solid var(--border);
+  padding: 4px 10px; border-radius: 999px;
+}
+html[data-theme="dark"] .sched-pills span { background: rgba(255, 255, 255, .05); }
+
+.sched-time {
+  display: flex; flex-direction: column; gap: 4px; align-items: flex-end;
+  font-size: 12.5px; color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.sched-time span:first-child { font-weight: 600; color: var(--text-3); }
+
+@media (max-width: 680px) {
+  .sched-row { grid-template-columns: 64px 1fr; padding: 18px; }
+  .sched-date { min-height: 62px; }
+  .sched-date .d { font-size: 21px; }
+  .sched-time {
+    grid-column: 2; flex-direction: row; gap: 10px;
+    align-items: center; justify-content: flex-start;
+    padding-top: 4px;
+  }
+}
+
+/* Education note reuse */
+.edu-note { text-align: center; max-width: 560px; margin: 44px auto 0; }
+.edu-note p { font-size: 14px; color: var(--text-2); line-height: 1.6; }
