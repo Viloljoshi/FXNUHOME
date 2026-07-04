@@ -65,83 +65,79 @@ html[data-theme="dark"] .session-when { background: rgba(255, 255, 255, .06); }
 
 @media (max-width: 760px) { .session-grid { grid-template-columns: 1fr; } }
 
-/* ── July schedule ──────────────────────────────────────── */
-.sched { max-width: 860px; margin: 0 auto; display: grid; gap: 34px; }
-.sched-week-label {
-  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--text-2); margin-bottom: 12px; padding-left: 4px;
-}
-.sched-rows { display: grid; gap: 12px; }
-.sched-row {
-  display: grid; grid-template-columns: 86px 1fr auto;
-  gap: 20px; align-items: center;
+/* ── July schedule: compact timetable ───────────────────── */
+.tt {
+  max-width: 880px; margin: 0 auto;
   background: var(--surface);
   border: .5px solid var(--border-2);
-  border-radius: 22px;
-  padding: 20px 26px 20px 20px;
-  position: relative; overflow: hidden;
-  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .03);
 }
-.sched-row:hover {
-  transform: translateY(-3px) scale(1.005);
-  box-shadow: 0 18px 44px -18px rgba(0, 0, 0, .16);
-  border-color: rgba(10, 132, 255, .25);
-}
-html[data-theme="dark"] .sched-row { background: var(--surface-2); }
-html[data-theme="dark"] .sched-row:hover { box-shadow: 0 18px 44px -18px rgba(0, 0, 0, .7); }
+html[data-theme="dark"] .tt { background: var(--surface-2); }
 
-.sched-date {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+.tt-head {
+  display: grid; grid-template-columns: 72px 1fr 1fr;
   background: var(--surface-2);
-  border: .5px solid var(--border);
-  border-radius: 15px;
-  padding: 12px 8px;
-  min-height: 72px;
+  border-bottom: .5px solid var(--border-2);
 }
-html[data-theme="dark"] .sched-date { background: rgba(255, 255, 255, .05); }
-.sched-date .d {
-  font-size: 26px; font-weight: 800; letter-spacing: -.03em; line-height: 1;
-  font-variant-numeric: tabular-nums;
+html[data-theme="dark"] .tt-head { background: rgba(255, 255, 255, .04); }
+.tt-corner {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--text-2);
 }
-.sched-date .m { font-size: 10.5px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--text-2); margin-top: 4px; }
+.tt-col { padding: 18px 24px 16px; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+.tt-col b { font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+.tt-col-time { font-size: 12px; color: var(--text-2); font-variant-numeric: tabular-nums; }
 
 .sched-tag {
   display: inline-block;
-  font-size: 10.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
-  padding: 4px 10px; border-radius: 999px; margin-bottom: 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px;
 }
 .sched-tag.brief { color: #0071e3; background: rgba(10, 132, 255, .1); }
 .sched-tag.class { color: #7d4ad1; background: rgba(142, 92, 230, .12); }
 html[data-theme="dark"] .sched-tag.brief { color: #6db2ff; }
 html[data-theme="dark"] .sched-tag.class { color: #b394f2; }
 
-.sched-info h4 { font-size: 17.5px; font-weight: 700; letter-spacing: -.015em; margin-bottom: 8px; }
-.sched-pills { display: flex; gap: 7px; flex-wrap: wrap; }
-.sched-pills span {
-  font-size: 11.5px; font-weight: 500; color: var(--text-2);
-  background: var(--surface-2);
-  border: .5px solid var(--border);
-  padding: 4px 10px; border-radius: 999px;
+.tt-row {
+  display: grid; grid-template-columns: 72px 1fr 1fr;
+  border-top: .5px solid var(--border);
+  transition: background .25s;
 }
-html[data-theme="dark"] .sched-pills span { background: rgba(255, 255, 255, .05); }
-
-.sched-time {
-  display: flex; flex-direction: column; gap: 4px; align-items: flex-end;
-  font-size: 12.5px; color: var(--text-2);
+.tt-row:hover { background: var(--surface-2); }
+html[data-theme="dark"] .tt-row:hover { background: rgba(255, 255, 255, .035); }
+.tt-week {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 800; color: var(--text-2);
   font-variant-numeric: tabular-nums;
-  white-space: nowrap;
 }
-.sched-time span:first-child { font-weight: 600; color: var(--text-3); }
+.tt-cell { padding: 20px 24px; border-left: .5px solid var(--border); }
+.tt-date {
+  display: inline-block;
+  font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  margin-bottom: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.tt-cell.brief .tt-date { color: #0071e3; }
+.tt-cell.class .tt-date { color: #7d4ad1; }
+html[data-theme="dark"] .tt-cell.brief .tt-date { color: #6db2ff; }
+html[data-theme="dark"] .tt-cell.class .tt-date { color: #b394f2; }
+.tt-cell h4 { font-size: 15.5px; font-weight: 600; letter-spacing: -.012em; margin: 0 0 4px; }
+.tt-cell p { font-size: 12.5px; line-height: 1.5; color: var(--text-2); margin: 0; }
 
-@media (max-width: 680px) {
-  .sched-row { grid-template-columns: 64px 1fr; padding: 18px; }
-  .sched-date { min-height: 62px; }
-  .sched-date .d { font-size: 21px; }
-  .sched-time {
-    grid-column: 2; flex-direction: row; gap: 10px;
-    align-items: center; justify-content: flex-start;
-    padding-top: 4px;
-  }
+@media (max-width: 720px) {
+  .tt-head { grid-template-columns: 1fr 1fr; }
+  .tt-corner { display: none; }
+  .tt-col { padding: 14px 16px 12px; }
+  .tt-col-time { font-size: 10.5px; }
+  .tt-row { grid-template-columns: 1fr 1fr; }
+  .tt-week { display: none; }
+  .tt-cell { padding: 14px 16px; }
+  .tt-cell:first-of-type { border-left: none; }
+  .tt-cell h4 { font-size: 13.5px; }
+  .tt-cell p { font-size: 11.5px; }
 }
 
 /* Education note reuse */
